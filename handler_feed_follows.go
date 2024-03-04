@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/AnkitNayan83/go-rss-agg/internal/database"
+	"github.com/go-chi/chi"
 	"github.com/google/uuid"
 )
 
@@ -44,17 +45,47 @@ func (apiCfg apiConfig) handlerCreateFeedFollows(w http.ResponseWriter, r *http.
 		return
 	}
 
+	respondWithJson(w, 201, databaseFeedFollowToFeedFollow(feed_follows))
+}
+
+func (apiCfg apiConfig) handlerGetFeedFollows(w http.ResponseWriter, r *http.Request, user database.User) {
+
+	feed_follows, err := apiCfg.DB.GetUserFeedFollows(r.Context(), user.ID)
+
+	if err != nil {
+		respondWithError(w, 500, fmt.Sprintf("Error in getting feed follows: %v", err))
+		return
+	}
+
 	respondWithJson(w, 201, databaseFeedFollowsToFeedFollows(feed_follows))
 }
 
-// func (apiCfg apiConfig) handlerGetFeeds(w http.ResponseWriter, r *http.Request) {
+func (apiCfg apiConfig) handlerDeleteFeedFollow(w http.ResponseWriter, r *http.Request, user database.User) {
 
-// 	feeds, err := apiCfg.DB.GetFeeds(r.Context())
+	feedFollowIDStr := chi.URLParam(r, "feedFollowID")
+	feedFollowID, err := uuid.Parse(feedFollowIDStr)
 
-// 	if err != nil {
-// 		respondWithError(w, 500, fmt.Sprintf("Error in getting feeds: %v", err))
-// 		return
-// 	}
+	if err != nil {
+		respondWithError(w, 400, fmt.Sprintf("Cannot parse feed follows id: %v", err))
+		return
+	}
 
-// 	respondWithJson(w, 201, databaseFeedsToFeeds(feeds))
-// }
+	err = apiCfg.DB.DeleteFeedFollow(r.Context(), database.DeleteFeedFollowParams{
+		ID:     feedFollowID,
+		UserID: user.ID,
+	})
+
+	if err != nil {
+		respondWithError(w, 400, fmt.Sprintf("Cannot delete feed follows: %v", err))
+		return
+	}
+
+	type deleteResponse struct {
+		Message string `json:"message"`
+	}
+
+	respondWithJson(w, 200, deleteResponse{
+		Message: "Feed unfollowed successfully",
+	})
+
+}
