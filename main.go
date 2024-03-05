@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/AnkitNayan83/go-rss-agg/internal/database"
 	"github.com/go-chi/chi"
@@ -19,6 +20,7 @@ type apiConfig struct {
 }
 
 func main() {
+
 	env_err := godotenv.Load()
 
 	if env_err != nil {
@@ -41,11 +43,12 @@ func main() {
 		log.Fatal("Databese connection failed: ", conn_err)
 	}
 
-	queries := database.New(conn) // to convert conn type to database.queries type
-
+	db := database.New(conn) // to convert conn type to database.queries type
 	apiCfg := apiConfig{
-		DB: queries,
+		DB: db,
 	}
+
+	go startScraping(db, 10, time.Minute)
 
 	router := chi.NewRouter()
 
