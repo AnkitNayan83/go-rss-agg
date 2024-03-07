@@ -4,15 +4,15 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/AnkitNayan83/go-rss-agg)
 ![GitHub issues](https://img.shields.io/github/issues/AnkitNayan83/go-rss-agg)
 
-Welcome to our RSS Aggregator project, built with Go! This tool allows users to create RSS feeds and enables other users to follow those feeds. Stay updated with the latest content from your favorite sources hassle-free.
+Welcome to my RSS Aggregator project, built with Go! This tool allows users to create RSS feeds and enables other users to follow those feeds. Stay updated with the latest content from your favorite sources hassle-free.
 
 ## Features
 
-- **User-Friendly Interface**: Simple and intuitive interface for creating and managing RSS feeds.
-- **Customization**: Users can customize their feed subscriptions according to their interests.
-- **Follow Feeds**: Users can follow feeds created by others and receive updates from their chosen sources.
-- **Efficient Parsing**: Utilizes efficient parsing techniques to handle large volumes of RSS feed data.
-- **Security**: Implements security measures to ensure user data privacy and protection.
+-   **User-Friendly Interface**: Simple and intuitive interface for creating and managing RSS feeds.
+-   **Customization**: Users can customize their feed subscriptions according to their interests.
+-   **Follow Feeds**: Users can follow feeds created by others and receive updates from their chosen sources.
+-   **Efficient Parsing**: Utilizes efficient parsing techniques to handle large volumes of RSS feed data.
+-   **Security**: Implements security measures to ensure user data privacy and protection.
 
 ## Installation
 
@@ -56,12 +56,12 @@ Welcome to our RSS Aggregator project, built with Go! This tool allows users to 
 
 Contributions are welcome! Here's how you can contribute to this project:
 
-- Fork the repository.
-- Create a new branch (`git checkout -b feature`)
-- Make your changes.
-- Commit your changes (`git commit -am 'Add new feature'`)
-- Push to the branch (`git push origin feature`)
-- Create a pull request.
+-   Fork the repository.
+-   Create a new branch (`git checkout -b feature`)
+-   Make your changes.
+-   Commit your changes (`git commit -am 'Add new feature'`)
+-   Push to the branch (`git push origin feature`)
+-   Create a pull request.
 
 ## License
 
